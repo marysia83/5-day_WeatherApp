@@ -3,6 +3,14 @@ var ul = document.querySelector("ul");
 var button = document.querySelector("button");
 var input = document.getElementById("searchCity");
 
+//to check if the items are already stored in the local storage (so when the page refresh it won't disappear)
+var itemsArray = [] 
+
+if (localStorage.getItem("myCities")) {
+    itemsArray = JSON.parse(localStorage.getItem("myCities"))
+} else {
+    itemsArray = []
+};   
 
 
 //URL to query the database:
@@ -13,9 +21,9 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCit
 
 //1. User types a city name, clicks search. Data goes to local storage:
 
-localStorage.setItem("items", JSON.stringify(itemsArray));
+localStorage.setItem("myCities", JSON.stringify(itemsArray));
 
-var data = JSON.parse(localStorage.getItem("items"));
+var data = JSON.parse(localStorage.getItem("myCities"));
 
 function liMaker(text) {
     var li = document.createElement("li");
@@ -23,12 +31,23 @@ function liMaker(text) {
     ul.appendChild(li);
 };
 
-form.addEventListener("submit", function(e) {
+button.addEventListener("click", function(e) {
     e.preventDefault()
 
     itemsArray.push(input.value)
+    localStorage.setItem("myCities", JSON.stringify(itemsArray))
+
+    liMaker(input.value)
     input.value = ""
 });
+
+//will display all previously stored info from Local St every time you open the app
+data.forEach(function (item) {
+    liMaker(item)
+});
+
+
+
 
 
 
