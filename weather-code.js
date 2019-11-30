@@ -52,13 +52,28 @@ data.forEach(function (item) {
 // URL to query the database:
 var APIKey = "70ef7114ad41776899346875cbf45412";
 var searchCity = document.getElementById("searchCity");
-var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "units=imperial&appid=" + APIKey;
+var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "&units=imperial&appid=" + APIKey;
 
 // Run our AJAX call to the OpenWeatherMap API:
 $.ajax({
     url: queryURL,
     method: "GET"
 })
+
+.then(function(response) {
+    console.log(queryURL);
+    console.log(response);
+
+    $(".city").html("<h1>" + response.name + " Weather Details</h1>");
+    $(".wind").text("Wind Speed: " + response.wind.speed);
+    $(".humidity").text("Humidity: " + response.main.humidity);
+    $(".temp").text("Temperature (F): " + response.main.temp);
+
+    console.log("Wind Speed: " + response.wind.speed);
+    console.log("Humidity: " + response.main.humidity);
+    console.log("Temperature (F): " + response.main.temp);
+
+});
 
 
 // 3. searched city will appear in a list of recent searches as a link 
