@@ -1,3 +1,5 @@
+//VARIABLES AND OTHER USEFUL ITEMS:
+
 var form = document.querySelector("form-group");
 var ul = document.querySelector("ul");
 var button = document.querySelector("button");
@@ -12,12 +14,9 @@ if (localStorage.getItem("myCities")) {
     itemsArray = []
 };   
 
+//=====================================
 
-//URL to query the database:
-var APIKey = "70ef7114ad41776899346875cbf45412";
-var searchCity = document.getElementById("searchCity");
-var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "units=imperial&appid=" + APIKey;
-
+//FUNCTIONS:
 
 //1. User types a city name, clicks search. Data goes to local storage:
 
@@ -41,17 +40,26 @@ button.addEventListener("click", function(e) {
     input.value = ""
 });
 
-//will display all previously stored info from Local St every time you open the app
+// will display all previously stored info from Local St every time you open the app
 data.forEach(function (item) {
     liMaker(item)
 });
 
+//====================================================
+
+// 2. searched city will go to API and show the results as 5 day forecast
+
+// URL to query the database:
+var APIKey = "70ef7114ad41776899346875cbf45412";
+var searchCity = document.getElementById("searchCity");
+var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "units=imperial&appid=" + APIKey;
+
+// Run our AJAX call to the OpenWeatherMap API:
+$.ajax({
+    url: queryURL,
+    method: "GET"
+})
 
 
-
-
-
-
-//2. searched city will go to API and show the results as 5 day forecast
-//3. searched city will appear in a list of recent searches as a link 
-//4. when recent searches are clicked, it get to #2
+// 3. searched city will appear in a list of recent searches as a link 
+// 4. when recent searches are clicked, it get to #2
