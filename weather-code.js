@@ -2,8 +2,11 @@
 
 var form = document.querySelector("form-group");
 var ul = document.querySelector("ul");
-var button = document.querySelector("button");
 var input = document.getElementById("searchCity");
+var countryCode = document.querySelector("value");
+var fullLocation = input + "," + countryCode;
+console.log(fullLocation);
+
 
 //to check if the items are already stored in the local storage (so when the page refresh it won't disappear)
 var itemsArray = [] 
@@ -13,6 +16,8 @@ if (localStorage.getItem("myCities")) {
 } else {
     itemsArray = []
 };   
+
+
 
 //=====================================
 
@@ -30,7 +35,10 @@ function liMaker(text) {
     ul.appendChild(li);
 };
 
-button.addEventListener("click", function(e) {
+
+var searchButton = document.getElementById("searchButton");
+
+searchButton.addEventListener("click", function(e) {
     e.preventDefault()
 
     itemsArray.push(input.value)
