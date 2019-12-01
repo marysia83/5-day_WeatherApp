@@ -20,7 +20,7 @@
 
         <form>
             <div class="form-group">
-              <label for="enterCity">Enter city name to see the next 5-days forecast</label>
+              <label for="enterCity">Enter city name to see the next 5-days forecast:</label>
               <input type="text" class="form-control" id="searchCity" aria-describedby="emailHelp" placeholder="City name">
             </div> <!--end of form-->
             
@@ -29,10 +29,10 @@
 
             <form>
               <div class="form-group">
-                <label for="enterCity">Select country:</label>
+                <label for="enterCity">Select a country:</label>
                 <br>
 
-            <select>
+            <select id="selectCountry">
               <option value="AF">Afghanistan</option>
               <option value="AX">Åland Islands</option>
               <option value="AL">Albania</option>
@@ -285,8 +285,7 @@
             </select>
             </div> <!--end of form-->
 
-            <label for="confirmSearch">Confirm weather location:</label>
-            <p id="yourSearch">test</p>
+            <p id="yourSearch"></p>
 
 
             <button type="submit" class="btn btn-primary" id="searchButton">Search</button>

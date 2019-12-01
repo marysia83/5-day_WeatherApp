@@ -2,10 +2,17 @@
 
 var form = document.querySelector("form-group");
 var ul = document.querySelector("ul");
-var input = document.getElementById("searchCity");
-var countryCode = document.querySelector("value");
-var fullLocation = input + "," + countryCode;
-console.log(fullLocation);
+var cityName = document.getElementById("searchCity");
+var countryId = document.getElementById("selectCountry");
+
+countryId.onchange = function() {
+    var x = countryId.value;
+    console.log(cityName.value);
+    console.log(countryId.value);
+    document.getElementById("yourSearch").innerHTML = "You selected: " + cityName.value + "," + x;
+};
+
+var input = cityName.value + "," + countryId.value;
 
 
 //to check if the items are already stored in the local storage (so when the page refresh it won't disappear)
@@ -48,9 +55,10 @@ searchButton.addEventListener("click", function(e) {
     input.value = ""
 });
 
+
 // will display all previously stored info from Local St every time you open the app
 data.forEach(function (item) {
-    liMaker(item)
+  liMaker(item)
 });
 
 //====================================================
