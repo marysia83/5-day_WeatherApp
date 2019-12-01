@@ -2,18 +2,15 @@
 
 var form = document.querySelector("form-group");
 var ul = document.querySelector("ul");
-var cityName = document.getElementById("searchCity");
+var input = document.getElementById("searchCity");
 var countryId = document.getElementById("selectCountry");
+
 
 countryId.onchange = function() {
     var x = countryId.value;
-    console.log(cityName.value);
-    console.log(countryId.value);
-    document.getElementById("yourSearch").innerHTML = "You selected: " + cityName.value + "," + x;
+
+    document.getElementById("yourSearch").innerHTML = "You selected: " + input.value + "," + x;
 };
-
-var input = cityName.value + "," + countryId.value;
-
 
 //to check if the items are already stored in the local storage (so when the page refresh it won't disappear)
 var itemsArray = [] 
@@ -36,16 +33,17 @@ localStorage.setItem("myCities", JSON.stringify(itemsArray));
 
 var data = JSON.parse(localStorage.getItem("myCities"));
 
-function liMaker(text) {
+
+    function liMaker(text) {
     var li = document.createElement("li");
     li.textContent = text;
     ul.appendChild(li);
 };
 
-
 var searchButton = document.getElementById("searchButton");
 
-searchButton.addEventListener("click", function(e) {
+
+    searchButton.addEventListener("click", function(e) {
     e.preventDefault()
 
     itemsArray.push(input.value)
@@ -61,6 +59,9 @@ data.forEach(function (item) {
   liMaker(item)
 });
 
+
+
+
 //====================================================
 
 // 2. searched city will go to API and show the results as 5 day forecast
@@ -68,13 +69,16 @@ data.forEach(function (item) {
 // URL to query the database:
 var APIKey = "70ef7114ad41776899346875cbf45412";
 var searchCity = document.getElementById("searchCity");
-var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + "&units=imperial&appid=" + APIKey;
+var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity.value + "," + countryId.value + "&units=imperial&appid=" + APIKey;
 
 // Run our AJAX call to the OpenWeatherMap API:
 $.ajax({
     url: queryURL,
     method: "GET"
 })
+
+
+
 
 .then(function(response) {
     console.log(queryURL);
