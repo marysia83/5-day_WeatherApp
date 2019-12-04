@@ -6,11 +6,14 @@ var input = document.getElementById("searchCity");
 var countryId = document.getElementById("selectCountry");
 
 
-countryId.onchange = function() {
+/* countryId.onchange = function() {
     var x = countryId.value;
 
+    console.log(input.value);
+    console.log(countryId.value);
+
     document.getElementById("yourSearch").innerHTML = "You selected: " + input.value + "," + x;
-};
+}; */
 
 //to check if the items are already stored in the local storage (so when the page refresh it won't disappear)
 var itemsArray = [] 
@@ -49,14 +52,19 @@ var searchButton = document.getElementById("searchButton");
     itemsArray.push(input.value)
     localStorage.setItem("myCities", JSON.stringify(itemsArray))
 
+    document.getElementById("yourSearch").innerHTML = "You selected: " + input.value;
+
     liMaker(input.value)
     input.value = ""
+
+    
 });
 
 
 // will display all previously stored info from Local St every time you open the app
 data.forEach(function (item) {
   liMaker(item)
+  
 });
 
 
@@ -69,7 +77,8 @@ data.forEach(function (item) {
 // URL to query the database:
 var APIKey = "70ef7114ad41776899346875cbf45412";
 var searchCity = document.getElementById("searchCity");
-var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity.value + "," + countryId.value + "&units=imperial&appid=" + APIKey;
+
+var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchCity.value + ",US&units=imperial&appid=" + APIKey;
 
 // Run our AJAX call to the OpenWeatherMap API:
 $.ajax({
